@@ -1,1329 +1,879 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Empire &amp; National Identity – Module 2 Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #050816;
-      --bg-alt: #0b1020;
-      --card: #111827;
-      --accent1: #f97316;
-      --accent2: #22c55e;
-      --accent3: #38bdf8;
-      --accent4: #a855f7;
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.4);
-      --shadow-strong: 0 24px 60px rgba(15, 23, 42, 0.9);
-      --radius-lg: 18px;
-      --radius-pill: 999px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
-        radial-gradient(circle at 100% 0%, rgba(250, 204, 21, 0.16), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(168, 85, 247, 0.18), transparent 60%),
-        linear-gradient(135deg, #020617 0%, #020617 30%, #050816 70%, #020617 100%);
-      color: var(--text-main);
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-
-    main {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 32px 16px 72px;
-    }
-
-    @media (min-width: 768px) {
-      main {
-        padding: 40px 24px 80px;
-      }
-    }
-
-    /* Top banner / course info */
-    .banner {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 14px 6px 6px;
-      border-radius: var(--radius-pill);
-      background: linear-gradient(
-        135deg,
-        rgba(248, 250, 252, 0.05),
-        rgba(15, 23, 42, 0.9)
-      );
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(14px);
-    }
-
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: conic-gradient(
-        from 210deg,
-        #f97316,
-        #22c55e,
-        #38bdf8,
-        #a855f7,
-        #f97316
-      );
-      padding: 1px;
-    }
-
-    .badge-pill-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      background: radial-gradient(circle at 30% 20%, #0f172a, #020617);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fbbf24;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-
-    .badge-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .badge-text span:first-child {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .badge-text span:last-child {
-      font-size: 0.92rem;
-      font-weight: 550;
-    }
-
-    .course-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .meta-pill {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.9);
-      color: var(--text-muted);
-    }
-
-    /* Hero / header */
-    .hero {
-      position: relative;
-      border-radius: 28px;
-      padding: 26px 20px 22px;
-      margin-bottom: 24px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.25), transparent 60%),
-        radial-gradient(circle at 100% 0%, rgba(244, 63, 94, 0.32), transparent 50%),
-        radial-gradient(circle at 90% 100%, rgba(34, 197, 94, 0.25), transparent 55%),
-        linear-gradient(140deg, #020617 0%, #020617 40%, #0b1120 80%, #020617 100%);
-      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      backdrop-filter: blur(18px);
-    }
-
-    @media (min-width: 880px) {
-      .hero {
-        display: grid;
-        grid-template-columns: 3fr 2fr;
-        gap: 40px;
-        padding: 30px 26px 24px;
-      }
-    }
-
-    .hero-left {
-      position: relative;
-      z-index: 2;
-    }
-
-    .eyebrow {
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .title-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .hero-title {
-      font-size: clamp(1.8rem, 3vw + 1rem, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      background: linear-gradient(120deg, #fbbf24, #f97316, #22c55e);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-tag {
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(248, 250, 252, 0.24);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-muted);
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-      color: var(--text-main);
-      max-width: 42rem;
-      line-height: 1.5;
-      margin-bottom: 14px;
-    }
-
-    .hero-subtitle strong {
-      color: #facc15;
-      font-weight: 600;
-    }
-
-    .hero-note {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      max-width: 38rem;
-      line-height: 1.45;
-    }
-
-    .hero-note span {
-      color: #38bdf8;
-      font-weight: 500;
-    }
-
-    .hero-actions {
-      margin-top: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .btn-primary {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 18px;
-      border-radius: var(--radius-pill);
-      border: none;
-      cursor: pointer;
-      color: #0b1120;
-      font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      background: radial-gradient(
-          circle at 0% 0%,
-          rgba(250, 250, 250, 0.6),
-          transparent 70%
-        ),
-        linear-gradient(135deg, #f97316, #facc15, #22c55e);
-      box-shadow:
-        0 18px 40px rgba(15, 23, 42, 0.9),
-        0 0 35px rgba(245, 158, 11, 0.6);
-      transition: transform 0.13s ease-out, box-shadow 0.13s ease-out,
-        filter 0.16s ease-out;
-    }
-
-    .btn-primary span.icon {
-      font-size: 1.12rem;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px) scale(1.01);
-      filter: brightness(1.04);
-      box-shadow:
-        0 24px 60px rgba(15, 23, 42, 1),
-        0 0 45px rgba(248, 250, 252, 0.4);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0) scale(0.99);
-      box-shadow:
-        0 12px 30px rgba(15, 23, 42, 0.9),
-        0 0 28px rgba(248, 250, 252, 0.35);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .hero-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.55);
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    .hero-meta-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #22c55e, #a3e635);
-      box-shadow: 0 0 14px rgba(74, 222, 128, 0.9);
-    }
-
-    /* Hero illustration side */
-    .hero-right {
-      margin-top: 18px;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (min-width: 880px) {
-      .hero-right {
-        margin-top: 0;
-      }
-    }
-
-    .orbital {
-      position: relative;
-      width: 100%;
-      max-width: 340px;
-      margin: 0 auto;
-      aspect-ratio: 4 / 3.4;
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.35), transparent 60%),
-        radial-gradient(circle at 90% 10%, rgba(244, 63, 94, 0.4), transparent 55%),
-        radial-gradient(circle at 50% 100%, rgba(34, 197, 94, 0.35), transparent 55%),
-        linear-gradient(145deg, #020617 0%, #020617 40%, #0b1120 80%, #020617 100%);
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      box-shadow: var(--shadow-strong);
-      overflow: hidden;
-      padding: 16px;
-    }
-
-    .orbital-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 24px;
-      border: 1px solid rgba(248, 250, 252, 0.06);
-      background: radial-gradient(
-        circle at 50% 10%,
-        rgba(248, 250, 252, 0.22),
-        transparent 60%
-      );
-      position: relative;
-      overflow: hidden;
-    }
-
-    .orbital-ring {
-      position: absolute;
-      inset: 16px;
-      border-radius: 999px;
-      border: 1px dashed rgba(148, 163, 184, 0.5);
-      transform: rotate(-10deg);
-    }
-
-    .orbital-ring:nth-child(2) {
-      inset: 32px 36px;
-      border-style: solid;
-      border-image: conic-gradient(
-          from 210deg,
-          rgba(248, 250, 252, 0.4),
-          rgba(34, 197, 94, 0.7),
-          rgba(56, 189, 248, 0.9),
-          rgba(244, 63, 94, 0.9),
-          rgba(248, 250, 252, 0.4)
-        )
-        1;
-      opacity: 0.7;
-    }
-
-    .orbital-node {
-      position: absolute;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #f9fafb, #38bdf8);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
-    }
-
-    .orbital-node:nth-child(3) {
-      top: 16%;
-      left: 14%;
-    }
-
-    .orbital-node:nth-child(4) {
-      top: 60%;
-      left: 78%;
-      transform: scale(0.9);
-      background: radial-gradient(circle at 30% 20%, #f9fafb, #f97316);
-      box-shadow: 0 0 18px rgba(248, 187, 56, 0.9);
-    }
-
-    .orbital-node:nth-child(5) {
-      top: 74%;
-      left: 28%;
-      transform: scale(0.8);
-      background: radial-gradient(circle at 30% 20%, #f9fafb, #22c55e);
-      box-shadow: 0 0 16px rgba(74, 222, 128, 0.9);
-    }
-
-    .orbital-center {
-      position: absolute;
-      inset: 28%;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 10%, #f9fafb, #fee2e2),
-        conic-gradient(
-          from 200deg,
-          rgba(56, 189, 248, 0.5),
-          rgba(244, 63, 94, 0.7),
-          rgba(250, 204, 21, 0.9),
-          rgba(34, 197, 94, 0.8),
-          rgba(56, 189, 248, 0.5)
-        );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow:
-        0 0 40px rgba(248, 250, 252, 0.35),
-        0 0 80px rgba(147, 197, 253, 0.7);
-    }
-
-    .orbital-center-inner {
-      width: 82%;
-      height: 82%;
-      border-radius: inherit;
-      background: radial-gradient(circle at 30% 0%, #1f2937, #020617);
-      border: 1px solid rgba(248, 250, 252, 0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      text-align: center;
-      color: var(--text-main);
-    }
-
-    .orbital-title {
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #bae6fd;
-      margin-bottom: 4px;
-    }
-
-    .orbital-main {
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    .orbital-main span {
-      color: #f97316;
-    }
-
-    .orbital-footer {
-      position: absolute;
-      left: 14px;
-      right: 14px;
-      bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    .orbital-label-pill {
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.7);
-    }
-
-    /* Sticky nav */
-    .section-nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      margin: 0 -16px 18px;
-      padding: 10px 16px 12px;
-      background: linear-gradient(
-        to bottom,
-        rgba(15, 23, 42, 0.96),
-        rgba(15, 23, 42, 0.9),
-        rgba(15, 23, 42, 0.65),
-        transparent
-      );
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
-    }
-
-    @media (min-width: 768px) {
-      .section-nav {
-        margin: 0 -24px 20px;
-        padding-inline: 24px;
-      }
-    }
-
-    .section-nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .scroll-nav {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
-    }
-
-    .scroll-nav::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .scroll-nav::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.9);
-      border-radius: 999px;
-    }
-
-    .scroll-nav button {
-      white-space: nowrap;
-      border-radius: 999px;
-      padding: 4px 9px;
-      border: 1px solid rgba(148, 163, 184, 0.65);
-      background: rgba(15, 23, 42, 0.98);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: background 0.12s ease, color 0.12s ease,
-        border-color 0.12s ease, transform 0.12s ease;
-    }
-
-    .scroll-nav button:hover {
-      background: rgba(15, 23, 42, 1);
-      color: #e5e7eb;
-      border-color: rgba(248, 250, 252, 0.6);
-      transform: translateY(-1px);
-    }
-
-    .scroll-nav button.active {
-      background: radial-gradient(
-          circle at 0 0,
-          rgba(248, 250, 252, 0.38),
-          transparent 65%
-        ),
-        linear-gradient(135deg, #f97316, #facc15);
-      border: none;
-      color: #111827;
-      font-weight: 600;
-      box-shadow:
-        0 10px 25px rgba(15, 23, 42, 0.9),
-        0 0 18px rgba(251, 191, 36, 0.7);
-    }
-
-    .nav-label {
-      display: none;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    @media (min-width: 992px) {
-      .nav-label {
-        display: inline-block;
-      }
-    }
-
-    /* Layout: assignment + input */
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.45fr);
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Sections / cards */
-    .section-card {
-      border-radius: var(--radius-lg);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.12), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(244, 63, 94, 0.18), transparent 55%),
-        linear-gradient(145deg, #020617, #020617 20%, #020617 100%);
-      border: 1px solid rgba(31, 41, 55, 0.95);
-      padding: 16px 15px 14px;
-      margin-bottom: 12px;
-      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .section-index {
-      display: inline-flex;
-      width: 24px;
-      height: 24px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 10%, #f9fafb, #4ade80);
-      color: #0f172a;
-      font-weight: 700;
-      font-size: 0.8rem;
-      box-shadow:
-        0 0 16px rgba(74, 222, 128, 0.7),
-        0 10px 20px rgba(15, 23, 42, 0.95);
-      flex-shrink: 0;
-    }
-
-    .section-title {
-      font-weight: 650;
-      font-size: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .section-tagline {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .prompts {
-      font-size: 0.86rem;
-      color: #cbd5f5;
-      margin-bottom: 8px;
-      line-height: 1.5;
-      border-radius: 12px;
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.9),
-        rgba(15, 23, 42, 0.96)
-      );
-      padding: 8px 9px 7px;
-    }
-
-    .prompts strong {
-      color: #fbbf24;
-      font-weight: 600;
-    }
-
-    .highlight-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 6px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.95);
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .dot-accent {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #f97316, #22c55e);
-      box-shadow: 0 0 12px rgba(251, 191, 36, 0.85);
-    }
-
-    .response {
-      margin-top: 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .response label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      padding: 8px 9px;
-      border-radius: 12px;
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text-main);
-      font-size: 0.86rem;
-      line-height: 1.5;
-      resize: vertical;
-      outline: none;
-      transition: border-color 0.12s ease, box-shadow 0.12s ease,
-        background 0.12s ease;
-    }
-
-    textarea:focus {
-      border-color: rgba(250, 204, 21, 0.8);
-      box-shadow:
-        0 0 0 1px rgba(234, 179, 8, 0.5),
-        0 18px 50px rgba(15, 23, 42, 1);
-      background: rgba(15, 23, 42, 1);
-    }
-
-    textarea::placeholder {
-      color: rgba(148, 163, 184, 0.85);
-    }
-
-    .two-col-textareas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .small-input {
-      width: 100%;
-      padding: 7px 9px;
-      border-radius: 10px;
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      background: rgba(15, 23, 42, 0.97);
-      color: var(--text-main);
-      font-size: 0.82rem;
-      outline: none;
-      transition: border-color 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .small-input:focus {
-      border-color: rgba(59, 130, 246, 0.8);
-      box-shadow:
-        0 0 0 1px rgba(59, 130, 246, 0.6),
-        0 12px 35px rgba(15, 23, 42, 0.95);
-      background: rgba(15, 23, 42, 1);
-    }
-
-    /* Right column: assignment details */
-    .sidebar {
-      position: sticky;
-      top: 68px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .sidebar-card {
-      border-radius: var(--radius-lg);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
-        linear-gradient(145deg, #020617, #020617 20%, #020617 100%);
-      border: 1px solid rgba(31, 41, 55, 0.95);
-      padding: 14px 13px 12px;
-      box-shadow: var(--shadow-strong);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .sidebar-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-      font-size: 0.86rem;
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    .sidebar-title span.dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #38bdf8, #a855f7);
-      box-shadow: 0 0 14px rgba(129, 140, 248, 0.9);
-    }
-
-    .sidebar strong {
-      color: #e5e7eb;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 4px 0 0;
-    }
-
-    .sidebar li {
-      margin-bottom: 4px;
-      line-height: 1.4;
-    }
-
-    .footer-note {
-      margin-top: 8px;
-      font-size: 0.8rem;
-      color: rgba(148, 163, 184, 0.95);
-    }
-
-    .footer-note strong {
-      color: #fbbf24;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empire & National Identity</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a0f00;
+    --parchment: #f5ead6;
+    --gold: #c8962e;
+    --rust: #8b2c1a;
+    --empire: #1e2d4a;
+    --cream: #fdf6e8;
+    --smoke: #e8dcc8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Crimson Pro', serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    background: var(--empire);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    border-bottom: 3px solid var(--gold);
+  }
+  nav a {
+    color: var(--parchment);
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 13px;
+    padding: 14px 18px;
+    transition: background 0.2s, color 0.2s;
+    border-right: 1px solid rgba(200,150,46,0.25);
+  }
+  nav a:first-child { border-left: 1px solid rgba(200,150,46,0.25); }
+  nav a:hover { background: var(--gold); color: var(--ink); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    background: var(--empire);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  #home::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8962e' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+  .hero-ornament {
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 900;
+    line-height: 0.95;
+    color: var(--parchment);
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+  .hero-title span {
+    color: var(--gold);
+    display: block;
+    font-style: italic;
+  }
+  .hero-divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 30px auto;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+  .hero-subtitle {
+    font-size: 18px;
+    color: var(--smoke);
+    text-align: center;
+    max-width: 600px;
+    font-style: italic;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+  .group-members {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s ease 1s forwards;
+  }
+  .member-tag {
+    background: rgba(200,150,46,0.15);
+    border: 1px solid rgba(200,150,46,0.4);
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-family: 'Bebas Neue', sans-serif;
+    animation: bounce 2s infinite;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 5px;
+    font-size: 12px;
+    color: var(--rust);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .section-line {
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin-bottom: 40px;
+  }
+  p { font-size: 18px; line-height: 1.8; margin-bottom: 20px; color: #2a1a0a; }
+
+  /* INTRO SECTION */
+  #intro { background: var(--cream); padding-top: 120px; }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .quote-block {
+    background: var(--empire);
+    color: var(--parchment);
+    padding: 40px;
+    position: relative;
+    border-left: 4px solid var(--gold);
+  }
+  .quote-block::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    line-height: 1;
+  }
+  .quote-block blockquote {
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-block cite {
+    display: block;
+    margin-top: 16px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-family: 'Bebas Neue', sans-serif;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* BACKGROUND INFO */
+  #background { background: var(--smoke); padding: 100px 0; }
+  #background > * { max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 40px; }
+  .timeline {
+    position: relative;
+    margin-top: 20px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--rust));
+  }
+  .timeline-item {
+    padding: 0 0 50px 40px;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+  .timeline-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--rust);
+    letter-spacing: 2px;
+  }
+  .timeline-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  /* AWARENESS SECTION */
+  #awareness { background: var(--cream); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .card {
+    border: 1px solid rgba(200,150,46,0.3);
+    padding: 32px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--rust));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .card:hover::after { transform: scaleX(1); }
+  .card-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: var(--parchment);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: var(--empire);
+  }
+  .card p { font-size: 16px; margin: 0; }
+
+  /* DRAWBACKS */
+  #drawbacks { background: var(--empire); color: var(--parchment); }
+  #drawbacks .section-title { color: var(--parchment); }
+  #drawbacks p { color: var(--smoke); }
+  .drawback-list { list-style: none; }
+  .drawback-list li {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(200,150,46,0.2);
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 20px;
+    align-items: start;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--smoke);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+  }
+  .drawback-list li.visible { opacity: 1; transform: translateY(0); }
+  .drawback-list li span:first-child {
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    margin-top: 3px;
+  }
+
+  /* TEXT EVIDENCE */
+  #evidence { background: var(--parchment); }
+  .evidence-block {
+    background: white;
+    border-left: 4px solid var(--gold);
+    padding: 30px 36px;
+    margin-bottom: 30px;
+    position: relative;
+  }
+  .evidence-source {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: var(--rust);
+    margin-bottom: 12px;
+  }
+  .evidence-block blockquote {
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .evidence-block .analysis {
+    font-size: 16px;
+    color: #555;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+  }
+
+  /* GAME */
+  #game { background: var(--smoke); }
+  .game-container {
+    background: var(--empire);
+    color: var(--parchment);
+    padding: 50px;
+    border: 2px solid var(--gold);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .game-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .game-instruction { font-style: italic; margin-bottom: 30px; color: var(--smoke); }
+  .game-question {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--parchment);
+    line-height: 1.4;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    background: transparent;
+    border: 1px solid rgba(200,150,46,0.4);
+    color: var(--parchment);
+    padding: 14px 20px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 17px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option-btn:hover { background: rgba(200,150,46,0.15); border-color: var(--gold); }
+  .option-btn.correct { background: rgba(40,120,60,0.3); border-color: #4a9060; color: #a0e0b0; }
+  .option-btn.wrong { background: rgba(139,44,26,0.3); border-color: var(--rust); color: #e0a090; }
+  .feedback {
+    margin-top: 20px;
+    padding: 16px;
+    font-style: italic;
+    background: rgba(255,255,255,0.05);
+    display: none;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .game-nav {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-btn {
+    background: var(--gold);
+    border: none;
+    color: var(--ink);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 15px;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-btn:hover { background: #e0a830; }
+  .nav-btn:disabled { background: #666; cursor: not-allowed; }
+  .progress-text { color: var(--gold); font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
+  #score-display { display: none; text-align: center; padding: 40px 0; }
+  #score-display .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    color: var(--gold);
+  }
+  #score-display p { color: var(--smoke); font-size: 20px; }
+
+  /* CREDITS */
+  #credits { background: var(--ink); color: var(--parchment); padding: 80px 40px; }
+  #credits .section-title { color: var(--parchment); }
+  .credits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .credit-group h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    font-size: 14px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200,150,46,0.3);
+  }
+  .credit-group ul { list-style: none; }
+  .credit-group li { font-size: 15px; padding: 6px 0; color: #bbb; line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    background: var(--empire);
+    text-align: center;
+    padding: 24px;
+    color: rgba(200,150,46,0.5);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    font-size: 12px;
+    border-top: 1px solid rgba(200,150,46,0.2);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @media (max-width: 700px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    nav a { font-size: 11px; padding: 12px 10px; }
+    .game-container { padding: 28px 20px; }
+    section { padding: 70px 20px; }
+  }
+</style>
 </head>
 <body>
-  <main>
-    <!-- Top banner -->
-    <div class="banner">
-      <div class="badge">
-        <div class="badge-pill">
-          <div class="badge-pill-inner">BL</div>
-        </div>
-        <div class="badge-text">
-          <span>British Literature 2323 • Module 2</span>
-          <span>Empire &amp; National Identity – Group Studio</span>
-        </div>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#intro">Introduction</a>
+  <a href="#background">Background</a>
+  <a href="#awareness">Awareness</a>
+  <a href="#drawbacks">Drawbacks</a>
+  <a href="#evidence">Evidence</a>
+  <a href="#game">Activity</a>
+  <a href="#credits">Credits</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-ornament">★ Presented by Group ★</div>
+  <h1 class="hero-title">Empire<span>& National Identity</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-subtitle">An exploration of power, belonging, and the literary imagination of empire — how nations construct identity and who is left out of that story.</p>
+  <div class="group-members">
+    <div class="member-tag">Member One</div>
+    <div class="member-tag">Member Two</div>
+    <div class="member-tag">Member Three</div>
+    <div class="member-tag">Member Four</div>
+  </div>
+  <div class="scroll-hint">▼ SCROLL TO EXPLORE ▼</div>
+</section>
+
+<!-- INTRODUCTION -->
+<section id="intro" style="max-width:1100px;margin:0 auto;padding:100px 40px;">
+  <div class="section-label">01 — Introduction</div>
+  <h2 class="section-title">Reading the Empire</h2>
+  <div class="section-line"></div>
+  <div class="intro-grid">
+    <div>
+      <p>Empire is not merely a political structure — it is a cultural, psychological, and literary force. The readings assigned to our group explore how imperial power shapes national consciousness, how colonized peoples negotiate their identities under domination, and how writers have used literature as both a mirror and a weapon against empire.</p>
+      <p>From the confident rhetoric of Rudyard Kipling's imperialism to the subversive counter-narratives of Chinua Achebe and Frantz Fanon, these texts reveal a fundamental tension: empire creates national identity for some while erasing it for others.</p>
+      <p>Our analysis focuses on three key threads: <em>the mythology of civilizing missions</em>, <em>the violence of imposed identity</em>, and <em>the literary response of the colonized</em>. Each thread illuminates how literature both perpetuates and resists imperial ideologies.</p>
+    </div>
+    <div>
+      <div class="quote-block">
+        <blockquote>"The Empire is under the world's orders, and the world is under the Empire's orders."</blockquote>
+        <cite>— Paraphrased colonial logic, 19th century</cite>
       </div>
-      <div class="course-meta">
-        <span class="meta-pill">Norton Anthology • Volume E</span>
-        <span class="meta-pill">“Empire and National Identity” • pp. 682–713</span>
+      <br>
+      <div class="quote-block" style="margin-top: 0;">
+        <blockquote>"Nations are not born. They are made — and unmade — by those who hold the pen as well as the sword."</blockquote>
+        <cite>— Literary Criticism Tradition</cite>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-left">
-        <div class="eyebrow">Focused on one cluster</div>
-        <div class="title-row">
-          <h1 class="hero-title">Empire &amp; National Identity.</h1>
-          <span class="hero-tag">Your Module #2 Focus</span>
-        </div>
-        <p class="hero-subtitle">
-          Use this page to craft a <strong>thorough, specific, and polished</strong> response
-          to every part of the Module #2 assignment, working only with the
-          <strong>“Empire and National Identity”</strong> readings in the Norton Anthology.
-        </p>
-        <p class="hero-note">
-          Draft your thinking here first—about imperial power, national myths, and colonial
-          voices—then move your best writing into a shared Word document with
-          <span>proper MLA formatting</span>.
-        </p>
-        <div class="hero-actions">
-          <button class="btn-primary" id="scrollToSections">
-            <span class="icon">✶</span>
-            <span>Start with Section I</span>
-          </button>
-          <div class="hero-meta">
-            <span>
-              <span class="hero-meta-dot"></span>
-              10 sections • I–X
-            </span>
-            <span>“Empire &amp; National Identity” only</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="orbital">
-          <div class="orbital-inner">
-            <div class="orbital-ring"></div>
-            <div class="orbital-ring"></div>
-            <div class="orbital-node"></div>
-            <div class="orbital-node"></div>
-            <div class="orbital-node"></div>
-            <div class="orbital-center">
-              <div class="orbital-center-inner">
-                <div class="orbital-title">Your Cluster</div>
-                <div class="orbital-main">
-                  Empire <span>&amp;</span><br />
-                  National Identity
-                </div>
-              </div>
-            </div>
-            <div class="orbital-footer">
-              <span class="orbital-label-pill">Imperial power &amp; belonging</span>
-              <span>Voices from Volume E</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<!-- BACKGROUND -->
+<div id="background">
+  <section>
+    <div class="section-label">02 — Background</div>
+    <h2 class="section-title">Historical & Political Context</h2>
+    <div class="section-line"></div>
+    <p>To understand the readings, one must understand the world that produced them. The age of European empire — roughly 1500–1960 — reshaped the globe's political geography and its cultural imagination. Literature was entangled with empire from the start: travel narratives justified conquest; novels celebrated the colonial hero; poetry made empire feel noble.</p>
 
-    <!-- Sticky nav -->
-    <nav class="section-nav">
-      <div class="section-nav-inner">
+    <div class="timeline" style="margin-top:50px;">
+      <div class="timeline-item">
+        <div class="timeline-year">1500s–1700s</div>
+        <h3>Age of Exploration & Early Colonialism</h3>
+        <p>European powers establish colonies across the Americas, Africa, and Asia. Literature begins framing indigenous peoples as "savage" and European intervention as civilizing. Shakespeare's <em>The Tempest</em> (1611) encodes this anxious dynamic through Caliban and Prospero.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1800s</div>
+        <h3>High Imperialism & National Literature</h3>
+        <p>The 19th century saw empire reach its zenith. Kipling's "The White Man's Burden" (1899) made imperial ideology poetic. Meanwhile, nationalist literatures emerged in colonized territories — writers like Tagore in India began articulating a counter-identity rooted in local culture, not British values.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1950s–1960s</div>
+        <h3>Decolonization & Anti-Imperial Writing</h3>
+        <p>As formal empires collapsed, a new wave of writers confronted their aftermath. Chinua Achebe's <em>Things Fall Apart</em> (1958) directly challenged the Conradian vision of Africa. Frantz Fanon's <em>The Wretched of the Earth</em> (1961) argued that colonialism was a psychological as much as a political wound.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1970s–Today</div>
+        <h3>Postcolonial Theory & National Identity Debates</h3>
+        <p>Edward Said's <em>Orientalism</em> (1978) gave scholars a vocabulary for critiquing how Western literature constructed the "Other." The conversation continues: who gets to define a nation's identity? Whose stories are told? These questions animate contemporary literature from across the formerly colonized world.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AWARENESS -->
+<section id="awareness">
+  <div class="section-label">03 — Contextual Awareness</div>
+  <h2 class="section-title">Why Context Matters</h2>
+  <div class="section-line"></div>
+  <p>Reading these texts without their historical context risks misreading them entirely. A passage that seems like adventure writing may in fact encode racial hierarchy. A heroic narrative may depend on the erasure of other people's stories. Here are four reasons context is essential:</p>
+  <div class="card-grid" style="margin-top:40px;">
+    <div class="card">
+      <div class="card-num">01</div>
+      <h3>Language is Political</h3>
+      <p>The vocabulary of empire — "civilization," "barbarian," "progress" — was not neutral. Understanding how these terms functioned historically reveals the ideological work literature was doing, even in texts that appear to be "just stories."</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <h3>Whose Perspective Dominates?</h3>
+      <p>Most canonical imperial texts are narrated from the colonizer's perspective. Recognizing this allows readers to hear what is suppressed or distorted — the silenced voices whose presence haunts the margins of the text.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <h3>National Identity is Constructed</h3>
+      <p>Nations present themselves as natural, ancient, and inevitable. Historically aware reading reveals that national identities are constructed — through literature, education, maps, and cultural policy — often in service of power.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">04</div>
+      <h3>Literature Responds to Literature</h3>
+      <p>Many postcolonial texts are direct responses to earlier imperial ones. Achebe's <em>Things Fall Apart</em> cannot be fully understood without Camus, Conrad, and Joyce. The literary conversation across empire is essential context.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DRAWBACKS -->
+<section id="drawbacks" style="background:var(--empire);padding:100px 0;">
+  <div style="max-width:1100px;margin:0 auto;padding:0 40px;">
+    <div class="section-label" style="color:var(--gold);">04 — Drawbacks & Resistance</div>
+    <h2 class="section-title">Society's Failures & Who Pushed Back</h2>
+    <div class="section-line"></div>
+    <p>Empire did not benefit everyone — not even those it claimed to elevate. Its ideological structures created profound injustices that writers, thinkers, and activists worked to name and dismantle.</p>
+    <br>
+    <ul class="drawback-list">
+      <li><span>▸</span><span><strong>Cultural Erasure.</strong> Imperial education systems actively suppressed indigenous languages, religions, and knowledge systems. In Nigeria, India, the Caribbean, and beyond, colonial schooling taught children that their own cultures were inferior. Ngũgĩ wa Thiong'o's memoir <em>Decolonising the Mind</em> (1986) documents this psychological violence — and his decision to stop writing in English.</span></li>
+      <li><span>▸</span><span><strong>Economic Exploitation Masked as Progress.</strong> The "civilizing mission" provided ideological cover for extraction. Raw materials left colonized lands; wealth accumulated in European capitals. Walter Rodney's <em>How Europe Underdeveloped Africa</em> (1972) systematically documents this reversal of the "progress" narrative.</span></li>
+      <li><span>▸</span><span><strong>Racial Hierarchy Codified in Law.</strong> Imperial legal systems institutionalized racial inequality. The apartheid regime in South Africa, Jim Crow laws in America, and caste-based discrimination across colonial South Asia all drew on imperial racial science — pseudoscience that literature often uncritically reproduced.</span></li>
+      <li><span>▸</span><span><strong>Women Doubly Marginalized.</strong> Imperial national identity was typically masculine. Women in colonized territories faced both colonial and patriarchal oppression. Writers like Chimamanda Ngozi Adichie and Jean Rhys (in <em>Wide Sargasso Sea</em>) reclaimed female subjectivity from imperial narratives.</span></li>
+      <li><span>▸</span><span><strong>Resistance and Response.</strong> The people did push back. The Harlem Renaissance created a counter-canon of Black American literature. The Négritude movement, led by Aimé Césaire and Léopold Sédar Senghor, celebrated African culture as a response to European denigration. Literary resistance was political resistance.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- TEXT EVIDENCE -->
+<section id="evidence">
+  <div class="section-label">05 — Textual Evidence</div>
+  <h2 class="section-title">Readings as Proof</h2>
+  <div class="section-line"></div>
+  <p>The following passages from our class readings demonstrate the tensions of empire and national identity. Each excerpt is followed by our analytical commentary.</p>
+
+  <div class="evidence-block" style="margin-top:40px;">
+    <div class="evidence-source">Rudyard Kipling — "The White Man's Burden" (1899)</div>
+    <blockquote>"Take up the White Man's burden / Send forth the best ye breed / Go bind your sons to exile / To serve your captives' need."</blockquote>
+    <div class="analysis"><strong>Analysis:</strong> Kipling frames imperialism as a noble sacrifice — the colonizer serving the colonized. This paternalistic inversion is central to imperial ideology: it erases the violence of conquest by recasting it as altruism. Note that the colonized are described as "captives," inadvertently admitting the coercive reality the poem's language otherwise obscures. The poem constructs a national identity for Britain built on duty, sacrifice, and racial superiority — all simultaneously.</div>
+  </div>
+
+  <div class="evidence-block">
+    <div class="evidence-source">Chinua Achebe — "An Image of Africa: Racism in Conrad's Heart of Darkness" (1977)</div>
+    <blockquote>"The question is whether a novel which celebrates [the] dehumanization... of African people can be called a great work of art."</blockquote>
+    <div class="analysis"><strong>Analysis:</strong> Achebe's challenge to Conrad is itself a literary act — a colonized writer reclaiming the authority to judge which texts deserve canonical status. His argument is not that Conrad is a bad writer, but that literary greatness cannot be cleanly separated from moral vision. This essay shows how the postcolonial response to empire often takes the form of critical rereadings that expose the hidden assumptions of supposedly "universal" masterpieces.</div>
+  </div>
+
+  <div class="evidence-block">
+    <div class="evidence-source">Frantz Fanon — The Wretched of the Earth (1961)</div>
+    <blockquote>"The colonized man finds his freedom in and through violence... it frees the native from his inferiority complex and from his despair and inaction."</blockquote>
+    <div class="analysis"><strong>Analysis:</strong> Fanon's controversial claim about violence must be read in its context: he is describing a psychological dynamic, not issuing a moral prescription. For Fanon, colonial humiliation is so thorough that the colonized subject can only reconstitute a sense of agency by refusing the colonizer's terms of engagement. This passage illuminates why national liberation movements often took the form they did — and why Fanon remains contested. His insight is that national identity after colonialism cannot simply be restored; it must be rebuilt.</div>
+  </div>
+</section>
+
+<!-- GAME / ACTIVITY -->
+<section id="game">
+  <div class="section-label">06 — Interactive Activity</div>
+  <h2 class="section-title">Empire & Identity Quiz</h2>
+  <div class="section-line"></div>
+  <p>Test your understanding of the key themes and texts we've covered. Read each question carefully — some answers may surprise you!</p>
+
+  <div class="game-container" style="margin-top:40px;">
+    <div class="game-title">Empire Knowledge Quiz</div>
+    <p class="game-instruction">5 questions · Choose the best answer · Read the feedback to deepen your understanding.</p>
+
+    <div id="quiz-area">
+      <div class="game-question" id="q-text"></div>
+      <div class="options" id="options-container"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="game-nav">
+        <span class="progress-text" id="progress">Question 1 of 5</span>
         <div>
-          <span class="nav-label">Jump to:</span>
-          <div class="scroll-nav" id="scrollNav">
-            <button data-target="section-I" class="active">I. Title &amp; Intro</button>
-            <button data-target="section-II">II. Whom Did You Read?</button>
-            <button data-target="section-III">III. Gut Reactions</button>
-            <button data-target="section-IV">IV. Formal Aspects</button>
-            <button data-target="section-V">V. Scope &amp; Content</button>
-            <button data-target="section-VI">VI. Style</button>
-            <button data-target="section-VII">VII. Audience</button>
-            <button data-target="section-VIII">VIII. Most Notable</button>
-            <button data-target="section-IX">IX. Vocabulary</button>
-            <button data-target="section-X">X. Associations</button>
-          </div>
-        </div>
-        <div class="course-meta" style="gap:6px;">
-          <span class="meta-pill">Empire &amp; National Identity • Group C</span>
+          <button class="nav-btn" id="next-btn" disabled onclick="nextQuestion()">NEXT →</button>
         </div>
       </div>
-    </nav>
-
-    <!-- Layout -->
-    <div class="layout">
-      <!-- LEFT: Response builder -->
-      <div>
-        <!-- I. Title & Introduction -->
-        <section class="section-card" id="section-I">
-          <div class="section-header">
-            <div class="section-index">I</div>
-            <h2 class="section-title">Title &amp; Introduction</h2>
-          </div>
-          <p class="section-tagline">
-            Give the “Empire and National Identity” readings a unifying title and explain their shared importance.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Invent a single, creative title that could sit on the front
-            of your MLA document or slides. In 1–2 focused paragraphs, explain how these texts
-            together explore <em>empire</em>, <em>nationhood</em>, and <em>identity</em>—for both
-            colonizers and colonized.
-          </div>
-          <div class="response">
-            <label for="groupTitle">Group’s unifying title</label>
-            <input
-              id="groupTitle"
-              class="small-input"
-              type="text"
-              placeholder="e.g., Mapping Empire: Voices of Nation and Resistance"
-            />
-          </div>
-          <div class="response">
-            <label for="introText">Introductory paragraph(s)</label>
-            <textarea
-              id="introText"
-              placeholder="Briefly introduce the 'Empire and National Identity' cluster, naming the main questions about imperial power, belonging, and nationhood that your group will help the class explore."
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- II. Whom Did You Read? -->
-        <section class="section-card" id="section-II">
-          <div class="section-header">
-            <div class="section-index">II</div>
-            <h2 class="section-title">Whom Did You Read?</h2>
-          </div>
-          <p class="section-tagline">
-            Identify the authors and works in the “Empire and National Identity” cluster.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> For each assigned piece in this cluster, list:
-            author, full title, the author’s dates and location (as available), the original
-            publication context (journal, book, year), and a 2–3 sentence summary focused on
-            empire and national identity.
-          </div>
-          <div class="response">
-            <label for="whomText">
-              Authors &amp; readings from “Empire and National Identity”
-            </label>
-            <textarea
-              id="whomText"
-              placeholder="Ex: [Author] ([dates]), '[Title]' (year), originally published in [context]. The piece responds to British imperial expansion by...&#10;&#10;[Continue for each assigned text in the cluster.]"
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- III. Gut Reactions -->
-        <section class="section-card" id="section-III">
-          <div class="section-header">
-            <div class="section-index">III</div>
-            <h2 class="section-title">First / “Gut” Reactions</h2>
-          </div>
-          <p class="section-tagline">
-            Capture each group member’s first impressions of the empire/nation themes.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Do not analyze here—record feelings and first responses.
-            Name each group member and briefly describe their initial reaction to the “Empire
-            and National Identity” readings: anger at injustice, admiration for resistance,
-            discomfort with imperial attitudes, confusion, surprise, etc. Then note whether
-            those reactions changed after discussion.
-          </div>
-          <div class="highlight-badge">
-            <span class="dot-accent"></span>
-            All group members must appear here.
-          </div>
-          <div class="response">
-            <label for="gutText">
-              Member-by-member gut reactions to the empire cluster
-            </label>
-            <textarea
-              id="gutText"
-              placeholder="Ex: Jordan felt unsettled by how casually the text celebrates imperial power...&#10;Avery immediately connected with the resistance voice in [Text] and felt energized by its critique of empire...&#10;[Continue with each member and describe whether their reactions shifted after discussion.]"
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- IV. Formal Aspects -->
-        <section class="section-card" id="section-IV">
-          <div class="section-header">
-            <div class="section-index">IV</div>
-            <h2 class="section-title">Formal Aspects of the Texts</h2>
-          </div>
-          <p class="section-tagline">
-            Identify genres, rhetorical modes, and key literary techniques used to represent empire and nationhood.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> For each work in this cluster, name the genre
-            (poetry, prose, speech, essay, etc.) and the dominant rhetorical mode
-            (narration, description, compare/contrast, argument, etc.). Use
-            <em>specific quotations or details</em> to show how figurative language,
-            imagery, symbolism, or irony shape our understanding of empire and national identity.
-          </div>
-          <div class="response">
-            <label for="formalText">
-              Genre, rhetorical modes, and literary techniques (with examples)
-            </label>
-            <textarea
-              id="formalText"
-              placeholder="Ex: In [Title], a first-person narrator describes the colonized landscape with lush imagery, but the metaphors also erase local voices...&#10;A poem might use an irregular rhythm or broken syntax to mirror the fracture of national identity under empire...&#10;[Cite short phrases or lines as evidence.]"
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- V. Scope / Content -->
-        <section class="section-card" id="section-V">
-          <div class="section-header">
-            <div class="section-index">V</div>
-            <h2 class="section-title">Scope &amp; Content</h2>
-          </div>
-          <p class="section-tagline">
-            Clarify the historical context and main ideas about empire and identity.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Explain the historical and cultural background of British
-            imperial expansion and debates over national identity in the period your texts
-            come from. Then answer: What specifically are these texts about? How do they
-            present empire—as civilizing, destructive, inevitable, resistible? What versions
-            of “nation” or “home” do they imagine?
-          </div>
-          <div class="response">
-            <label for="scopeText">
-              Context, content, and importance for “Empire and National Identity”
-            </label>
-            <textarea
-              id="scopeText"
-              placeholder="Ex: Written during the height of British imperial power, these texts ask who gets to belong to the 'nation' and whose stories are silenced...&#10;Together, they show how empire shapes identity, citizenship, and ideas of 'civilization'—questions that still matter in today’s global politics..."
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- VI. Style -->
-        <section class="section-card" id="section-VI">
-          <div class="section-header">
-            <div class="section-index">VI</div>
-            <h2 class="section-title">Style &amp; Voice</h2>
-          </div>
-          <p class="section-tagline">
-            Compare how different authors speak about empire and national identity.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Who is speaking in each text—a colonizer, a colonial subject,
-            a narrator looking back? What point of view do they use? Are the sentences formal,
-            official, and confident, or broken, ironic, and questioning? Compare voices that
-            defend empire with those that resist it, using short examples to show tone.
-          </div>
-          <div class="two-col-textareas">
-            <div>
-              <label for="styleCompare">
-                Overall comparison of styles in the cluster
-              </label>
-              <textarea
-                id="styleCompare"
-                placeholder="Compare how at least two authors sound when they write about empire and the nation. Who sounds authoritative or official? Who sounds marginalized, angry, or ironic?"
-              ></textarea>
-            </div>
-            <div>
-              <label for="styleExamples">
-                Key style examples (quoted phrases)
-              </label>
-              <textarea
-                id="styleExamples"
-                placeholder="Collect a few short quotations that really capture each author's tone toward empire and national identity."
-              ></textarea>
-            </div>
-          </div>
-        </section>
-
-        <!-- VII. Audience -->
-        <section class="section-card" id="section-VII">
-          <div class="section-header">
-            <div class="section-index">VII</div>
-            <h2 class="section-title">Audience</h2>
-          </div>
-          <p class="section-tagline">
-            Think about who each empire-related text is written for.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Based on style, vocabulary, and original publication
-            context, who seems to be the intended audience? British politicians, educated
-            middle-class readers, colonial administrators, colonized subjects, fellow activists?
-            Was each piece widely read in its own time, or did it become important later? How
-            does the intended audience shape how empire and national identity are described?
-          </div>
-          <div class="response">
-            <label for="audienceText">
-              Intended audience &amp; publishing context for each text
-            </label>
-            <textarea
-              id="audienceText"
-              placeholder="Ex: Because [Text] first appeared in a London periodical read by the educated elite, it frames empire as a national duty...&#10;By contrast, [Other Text], circulated in a colonial context, speaks directly to subjects who feel excluded from the British 'nation'..."
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- VIII. Most Notable -->
-        <section class="section-card" id="section-VIII">
-          <div class="section-header">
-            <div class="section-index">VIII</div>
-            <h2 class="section-title">Most Notable Aspects</h2>
-          </div>
-          <p class="section-tagline">
-            Name what most surprised or disturbed you about representations of empire and identity.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Identify anything shocking, ironic, or powerful in the way
-            these texts talk about empire, race, nationhood, or “civilization.” Are there images,
-            metaphors, or claims you found difficult to accept? If nothing felt controversial,
-            explain why the works seemed straightforward or reassuring in their picture of empire.
-          </div>
-          <div class="response">
-            <label for="notableText">
-              What stood out most to your group about empire and national identity?
-            </label>
-            <textarea
-              id="notableText"
-              placeholder="Ex: Our group was most struck by how casually one text assumes British rule is 'natural,' while another text quietly undermines that idea by showing the emotional cost of conquest..."
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- IX. Vocabulary -->
-        <section class="section-card" id="section-IX">
-          <div class="section-header">
-            <div class="section-index">IX</div>
-            <h2 class="section-title">Best Vocabulary</h2>
-          </div>
-          <p class="section-tagline">
-            Collect powerful or revealing words about empire, race, and nationhood.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> After highlighting in your anthology, choose especially
-            “great” words that help build ideas about empire and national identity. These might
-            be technical terms, political slogans, or loaded adjectives. For each term, give the
-            word, a brief definition in your own words, and why it matters in this context.
-          </div>
-          <div class="response">
-            <label for="vocabText">
-              Vocabulary list with explanations (empire &amp; national identity)
-            </label>
-            <textarea
-              id="vocabText"
-              placeholder="Ex: 'Civilizing mission' – a phrase used to justify empire by claiming it improves colonized peoples; important because it hides violence behind moral language...&#10;'Homeland' – suggests emotional belonging, but the readings show how empire complicates whose homeland counts..."
-            ></textarea>
-          </div>
-        </section>
-
-        <!-- X. Associations -->
-        <section class="section-card" id="section-X">
-          <div class="section-header">
-            <div class="section-index">X</div>
-            <h2 class="section-title">Connections &amp; Associations</h2>
-          </div>
-          <p class="section-tagline">
-            Connect the “Empire and National Identity” readings to films, art, music, and other literature.
-          </p>
-          <div class="prompts">
-            <strong>Guidance:</strong> Brainstorm as a group. Which movies, songs, paintings,
-            TV shows, novels, plays, or poems feel connected to the way these texts present
-            empire and national identity? Be selective and explain the link: similar portrayals
-            of colonial subjects, parallel struggles over belonging, or contrasting views of
-            national pride and shame.
-          </div>
-          <div class="two-col-textareas">
-            <div>
-              <label for="mediaAssoc">
-                Motion pictures, visual art, &amp; music
-              </label>
-              <textarea
-                id="mediaAssoc"
-                placeholder="Ex: We connected [Film] to this cluster because both show the tension between loyalty to the empire and loyalty to local communities..."
-              ></textarea>
-            </div>
-            <div>
-              <label for="litAssoc">
-                Other literary works (novels, poems, plays)
-              </label>
-              <textarea
-                id="litAssoc"
-                placeholder="Ex: [Novel/Poem] echoes our readings in the way it questions who gets to be part of the 'nation' and who is left outside its borders..."
-              ></textarea>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- RIGHT: Assignment & topic -->
-      <aside class="sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-title">
-            <span class="dot"></span>
-            <span>Assignment Snapshot</span>
-          </div>
-          <p>
-            This page mirrors your <strong>British Literature 2323, Module #2</strong> group
-            assignment, but it is focused only on the Norton Anthology cluster
-            <strong>“Empire and National Identity” (Volume E, pp. 682–713)</strong>.
-          </p>
-          <ul>
-            <li>✔ Every group member contributes to the written report.</li>
-            <li>✔ Final document must follow <strong>MLA format</strong> in Word.</li>
-            <li>✔ Responses should be detailed and specific, not vague or minimal.</li>
-          </ul>
-          <p class="footer-note">
-            Use this space to <strong>draft and refine</strong> your thinking about
-            empire, nationhood, and identity before polishing it for your MLA document.
-          </p>
-        </div>
-
-        <div class="sidebar-card">
-          <div class="sidebar-title">
-            <span class="dot"></span>
-            <span>Empire &amp; National Identity • Volume E</span>
-          </div>
-          <p>
-            Your readings explore how British imperial expansion reshaped what it meant to be
-            a “nation” and who counted as part of it. As you work:
-          </p>
-          <ul>
-            <li>• Track how <strong>British identity</strong> is defined or challenged.</li>
-            <li>• Notice how <strong>colonial voices</strong> speak back to empire.</li>
-            <li>• Pay attention to <strong>images of land, home, and borders</strong>.</li>
-            <li>• Ask who is <strong>included</strong> or <strong>excluded</strong> from the nation.</li>
-          </ul>
-        </div>
-
-        <div class="sidebar-card">
-          <div class="sidebar-title">
-            <span class="dot"></span>
-            <span>Tips for a Strong MLA Report</span>
-          </div>
-          <ul>
-            <li>• Use <strong>clear topic sentences</strong> for each paragraph.</li>
-            <li>• Blend <strong>quotation and analysis</strong>—never leave quotes unexplained.</li>
-            <li>• Name authors and texts precisely and consistently.</li>
-            <li>• Make sure the final document is <strong>carefully proofread</strong> and unified in voice.</li>
-          </ul>
-        </div>
-      </aside>
     </div>
-  </main>
 
-  <script>
-    // Smooth scrolling for section nav
-    const scrollButtons = document.querySelectorAll("#scrollNav button");
-    const sections = {};
-    scrollButtons.forEach((btn) => {
-      const id = btn.getAttribute("data-target");
-      const el = document.getElementById(id);
-      if (el) sections[id] = el;
-      btn.addEventListener("click", () => {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
+    <div id="score-display">
+      <div class="score-num" id="final-score"></div>
+      <p>out of 5 correct</p>
+      <p style="margin-top:20px;font-style:italic;" id="score-msg"></p>
+      <button class="nav-btn" style="margin-top:24px;" onclick="resetQuiz()">PLAY AGAIN</button>
+    </div>
+  </div>
+</section>
 
-    // Highlight active nav button while scrolling
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            scrollButtons.forEach((btn) => {
-              btn.classList.toggle(
-                "active",
-                btn.getAttribute("data-target") === id
-              );
-            });
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
+<!-- CREDITS -->
+<section id="credits" style="background:var(--ink);color:var(--parchment);max-width:100%;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label" style="color:var(--gold);">07 — Credits</div>
+    <h2 class="section-title" style="color:var(--parchment);">References & Credits</h2>
+    <div class="section-line"></div>
+    <div class="credits-grid">
+      <div class="credit-group">
+        <h4>Primary Texts</h4>
+        <ul>
+          <li>Kipling, Rudyard. "The White Man's Burden." <em>McClure's Magazine</em>, 1899.</li>
+          <li>Achebe, Chinua. <em>Things Fall Apart</em>. Heinemann, 1958.</li>
+          <li>Achebe, Chinua. "An Image of Africa." 1977.</li>
+          <li>Fanon, Frantz. <em>The Wretched of the Earth</em>. Grove Press, 1961.</li>
+          <li>Said, Edward. <em>Orientalism</em>. Pantheon Books, 1978.</li>
+        </ul>
+      </div>
+      <div class="credit-group">
+        <h4>Secondary Sources</h4>
+        <ul>
+          <li>Ngũgĩ wa Thiong'o. <em>Decolonising the Mind</em>. Heinemann, 1986.</li>
+          <li>Rodney, Walter. <em>How Europe Underdeveloped Africa</em>. Bogle-L'Ouverture, 1972.</li>
+          <li>Rhys, Jean. <em>Wide Sargasso Sea</em>. Andre Deutsch, 1966.</li>
+          <li>Césaire, Aimé. <em>Discourse on Colonialism</em>. Monthly Review Press, 1955.</li>
+        </ul>
+      </div>
+      <div class="credit-group">
+        <h4>Website & Design</h4>
+        <ul>
+          <li>Typography: Google Fonts — Playfair Display, Crimson Pro, Bebas Neue</li>
+          <li>Design & Code: Original creation by the group</li>
+          <li>Background pattern: SVG geometric motif, original</li>
+          <li>No AI-generated or stock imagery used; all visuals are typographic</li>
+        </ul>
+      </div>
+      <div class="credit-group">
+        <h4>Group Members</h4>
+        <ul>
+          <li>Member One — Research & Writing</li>
+          <li>Member Two — Research & Writing</li>
+          <li>Member Three — Textual Analysis</li>
+          <li>Member Four — Design & Activity</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    Object.values(sections).forEach((sec) => observer.observe(sec));
+<footer>Empire & National Identity — Group Presentation</footer>
 
-    // Scroll-to-section-I button
-    const scrollToSections = document.getElementById("scrollToSections");
-    const firstSection = document.getElementById("section-I");
-    if (scrollToSections && firstSection) {
-      scrollToSections.addEventListener("click", () => {
-        firstSection.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
-  </script>
+<script>
+// Quiz data
+const questions = [
+  {
+    q: "What argument does Chinua Achebe make in 'An Image of Africa' about Joseph Conrad's Heart of Darkness?",
+    options: [
+      "That Conrad was a great humanitarian who sympathized with Africans",
+      "That the novel's dehumanizing portrayal of Africans disqualifies it from being considered great art",
+      "That Conrad had never actually visited Africa",
+      "That the novel is the most accurate depiction of colonialism ever written"
+    ],
+    correct: 1,
+    feedback: "Correct! Achebe challenges the literary canon by arguing that a novel cannot be considered a masterpiece if it is built on the dehumanization of African people. This essay is itself a postcolonial act — reclaiming critical authority."
+  },
+  {
+    q: "In Kipling's 'The White Man's Burden,' what does the metaphor of 'burden' reveal about imperial ideology?",
+    options: [
+      "That Europeans genuinely suffered under colonialism",
+      "That colonialism was understood as mutual exploitation",
+      "That empire was framed as a noble sacrifice, masking its violent and extractive reality",
+      "That Kipling was secretly anti-imperial"
+    ],
+    correct: 2,
+    feedback: "Exactly! The 'burden' framing inverts the actual power dynamic — colonizers claiming to serve colonized peoples. This paternalistic logic was used to justify conquest while erasing the harm caused. It constructs British national identity around self-sacrifice."
+  },
+  {
+    q: "According to Frantz Fanon, what function does violence serve in the context of decolonization?",
+    options: [
+      "It is always morally wrong and Fanon condemns it",
+      "It is purely recreational for the colonized",
+      "It is a psychological mechanism through which the colonized subject reclaims agency and identity",
+      "It was used only by colonial governments, never by independence movements"
+    ],
+    correct: 2,
+    feedback: "Right — Fanon's controversial claim is primarily psychological. Colonial humiliation is so complete that the colonized subject can only reconstitute selfhood by refusing the colonizer's terms. He's describing a dynamic, not simply prescribing a strategy."
+  },
+  {
+    q: "What did the Négritude movement, associated with Aimé Césaire and Léopold Sédar Senghor, primarily do?",
+    options: [
+      "Advocate for the continuation of French colonial rule",
+      "Celebrate African and Black identity as a counter-response to European cultural denigration",
+      "Argue that African cultures should adopt European values entirely",
+      "Focus exclusively on economic policy reform"
+    ],
+    correct: 1,
+    feedback: "Correct! Négritude was a literary and intellectual movement that reclaimed Black and African identity as something to celebrate, not overcome. It was a direct literary and cultural response to the racist logic of European imperialism — and an important precursor to postcolonial literature."
+  },
+  {
+    q: "Edward Said's concept of 'Orientalism' argues that Western literature and scholarship about the East primarily functions to:",
+    options: [
+      "Give an accurate and sympathetic account of Eastern cultures",
+      "Construct a distorted image of the 'Orient' that serves European imperial power",
+      "Translate Eastern philosophical ideas for Western audiences",
+      "Critique colonialism from within Western academic institutions"
+    ],
+    correct: 1,
+    feedback: "Spot on. Said argues that Western representations of the 'Orient' were not objective scholarship but a system of knowledge production that created the 'East' as exotic, irrational, and in need of Western rule. The representation itself was an act of power."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function loadQuestion() {
+  answered = false;
+  const q = questions[current];
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('progress').textContent = `Question ${current + 1} of ${questions.length}`;
+  document.getElementById('feedback').style.display = 'none';
+  document.getElementById('next-btn').disabled = true;
+  document.getElementById('next-btn').textContent = current === questions.length - 1 ? 'SEE RESULTS' : 'NEXT →';
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    container.appendChild(btn);
+  });
+}
+
+function selectAnswer(i) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach((btn, idx) => {
+    btn.onclick = null;
+    if (idx === q.correct) btn.classList.add('correct');
+    else if (idx === i && i !== q.correct) btn.classList.add('wrong');
+  });
+  if (i === q.correct) score++;
+  const fb = document.getElementById('feedback');
+  fb.textContent = q.feedback;
+  fb.style.display = 'block';
+  document.getElementById('next-btn').disabled = false;
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
+    showResults();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-area').style.display = 'none';
+  const sd = document.getElementById('score-display');
+  sd.style.display = 'block';
+  document.getElementById('final-score').textContent = score;
+  const msgs = [
+    "Keep reading — the empire is vast and complex.",
+    "A good start! Revisit the readings for deeper insight.",
+    "Solid understanding of the core themes!",
+    "Excellent — you've grasped the tensions of empire and identity.",
+    "Outstanding! You could teach this material."
+  ];
+  document.getElementById('score-msg').textContent = msgs[Math.min(score, 4)];
+}
+
+function resetQuiz() {
+  current = 0; score = 0;
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('score-display').style.display = 'none';
+  loadQuestion();
+}
+
+loadQuestion();
+
+// Scroll-triggered animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.timeline-item, .drawback-list li').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
