@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Empire &amp; National Identity – Module 2 Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --card: #111827;
+      --accent1: #f97316;
+      --accent2: #22c55e;
+      --accent3: #38bdf8;
+      --accent4: #a855f7;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.4);
+      --shadow-strong: 0 24px 60px rgba(15, 23, 42, 0.9);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(250, 204, 21, 0.16), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(168, 85, 247, 0.18), transparent 60%),
+        linear-gradient(135deg, #020617 0%, #020617 30%, #050816 70%, #020617 100%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 16px 72px;
+    }
+
+    @media (min-width: 768px) {
+      main {
+        padding: 40px 24px 80px;
+      }
+    }
+
+    /* Top banner / course info */
+    .banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 6px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(
+        135deg,
+        rgba(248, 250, 252, 0.05),
+        rgba(15, 23, 42, 0.9)
+      );
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(14px);
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: conic-gradient(
+        from 210deg,
+        #f97316,
+        #22c55e,
+        #38bdf8,
+        #a855f7,
+        #f97316
+      );
+      padding: 1px;
+    }
+
+    .badge-pill-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 30% 20%, #0f172a, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fbbf24;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .badge-text span:first-child {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .badge-text span:last-child {
+      font-size: 0.92rem;
+      font-weight: 550;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+    }
+
+    /* Hero / header */
+    .hero {
+      position: relative;
+      border-radius: 28px;
+      padding: 26px 20px 22px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.25), transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(244, 63, 94, 0.32), transparent 50%),
+        radial-gradient(circle at 90% 100%, rgba(34, 197, 94, 0.25), transparent 55%),
+        linear-gradient(140deg, #020617 0%, #020617 40%, #0b1120 80%, #020617 100%);
+      box-shadow: 0 28px 80px rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      backdrop-filter: blur(18px);
+    }
+
+    @media (min-width: 880px) {
+      .hero {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 40px;
+        padding: 30px 26px 24px;
+      }
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(1.8rem, 3vw + 1rem, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(120deg, #fbbf24, #f97316, #22c55e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-tag {
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(248, 250, 252, 0.24);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-main);
+      max-width: 42rem;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .hero-subtitle strong {
+      color: #facc15;
+      font-weight: 600;
+    }
+
+    .hero-note {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      max-width: 38rem;
+      line-height: 1.45;
+    }
+
+    .hero-note span {
+      color: #38bdf8;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      color: #0b1120;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: radial-gradient(
+          circle at 0% 0%,
+          rgba(250, 250, 250, 0.6),
+          transparent 70%
+        ),
+        linear-gradient(135deg, #f97316, #facc15, #22c55e);
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.9),
+        0 0 35px rgba(245, 158, 11, 0.6);
+      transition: transform 0.13s ease-out, box-shadow 0.13s ease-out,
+        filter 0.16s ease-out;
+    }
+
+    .btn-primary span.icon {
+      font-size: 1.12rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      filter: brightness(1.04);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 1),
+        0 0 45px rgba(248, 250, 252, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.99);
+      box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.9),
+        0 0 28px rgba(248, 250, 252, 0.35);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-meta-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #22c55e, #a3e635);
+      box-shadow: 0 0 14px rgba(74, 222, 128, 0.9);
+    }
+
+    /* Hero illustration side */
+    .hero-right {
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .hero-right {
+        margin-top: 0;
+      }
+    }
+
+    .orbital {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      aspect-ratio: 4 / 3.4;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(56, 189, 248, 0.35), transparent 60%),
+        radial-gradient(circle at 90% 10%, rgba(244, 63, 94, 0.4), transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(34, 197, 94, 0.35), transparent 55%),
+        linear-gradient(145deg, #020617 0%, #020617 40%, #0b1120 80%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: var(--shadow-strong);
+      overflow: hidden;
+      padding: 16px;
+    }
+
+    .orbital-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      border: 1px solid rgba(248, 250, 252, 0.06);
+      background: radial-gradient(
+        circle at 50% 10%,
+        rgba(248, 250, 252, 0.22),
+        transparent 60%
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .orbital-ring {
+      position: absolute;
+      inset: 16px;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+      transform: rotate(-10deg);
+    }
+
+    .orbital-ring:nth-child(2) {
+      inset: 32px 36px;
+      border-style: solid;
+      border-image: conic-gradient(
+          from 210deg,
+          rgba(248, 250, 252, 0.4),
+          rgba(34, 197, 94, 0.7),
+          rgba(56, 189, 248, 0.9),
+          rgba(244, 63, 94, 0.9),
+          rgba(248, 250, 252, 0.4)
+        )
+        1;
+      opacity: 0.7;
+    }
+
+    .orbital-node {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #38bdf8);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+    }
+
+    .orbital-node:nth-child(3) {
+      top: 16%;
+      left: 14%;
+    }
+
+    .orbital-node:nth-child(4) {
+      top: 60%;
+      left: 78%;
+      transform: scale(0.9);
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #f97316);
+      box-shadow: 0 0 18px rgba(248, 187, 56, 0.9);
+    }
+
+    .orbital-node:nth-child(5) {
+      top: 74%;
+      left: 28%;
+      transform: scale(0.8);
+      background: radial-gradient(circle at 30% 20%, #f9fafb, #22c55e);
+      box-shadow: 0 0 16px rgba(74, 222, 128, 0.9);
+    }
+
+    .orbital-center {
+      position: absolute;
+      inset: 28%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 10%, #f9fafb, #fee2e2),
+        conic-gradient(
+          from 200deg,
+          rgba(56, 189, 248, 0.5),
+          rgba(244, 63, 94, 0.7),
+          rgba(250, 204, 21, 0.9),
+          rgba(34, 197, 94, 0.8),
+          rgba(56, 189, 248, 0.5)
+        );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 40px rgba(248, 250, 252, 0.35),
+        0 0 80px rgba(147, 197, 253, 0.7);
+    }
+
+    .orbital-center-inner {
+      width: 82%;
+      height: 82%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 30% 0%, #1f2937, #020617);
+      border: 1px solid rgba(248, 250, 252, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      text-align: center;
+      color: var(--text-main);
+    }
+
+    .orbital-title {
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #bae6fd;
+      margin-bottom: 4px;
+    }
+
+    .orbital-main {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .orbital-main span {
+      color: #f97316;
+    }
+
+    .orbital-footer {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .orbital-label-pill {
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    /* Sticky nav */
+    .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 0 -16px 18px;
+      padding: 10px 16px 12px;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.65),
+        transparent
+      );
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .section-nav {
+        margin: 0 -24px 20px;
+        padding-inline: 24px;
+      }
+    }
+
+    .section-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .scroll-nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(148, 163, 184, 0.8) transparent;
+    }
+
+    .scroll-nav::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .scroll-nav::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.9);
+      border-radius: 999px;
+    }
+
+    .scroll-nav button {
+      white-space: nowrap;
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: rgba(15, 23, 42, 0.98);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.12s ease, color 0.12s ease,
+        border-color 0.12s ease, transform 0.12s ease;
+    }
+
+    .scroll-nav button:hover {
+      background: rgba(15, 23, 42, 1);
+      color: #e5e7eb;
+      border-color: rgba(248, 250, 252, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .scroll-nav button.active {
+      background: radial-gradient(
+          circle at 0 0,
+          rgba(248, 250, 252, 0.38),
+          transparent 65%
+        ),
+        linear-gradient(135deg, #f97316, #facc15);
+      border: none;
+      color: #111827;
+      font-weight: 600;
+      box-shadow:
+        0 10px 25px rgba(15, 23, 42, 0.9),
+        0 0 18px rgba(251, 191, 36, 0.7);
+    }
+
+    .nav-label {
+      display: none;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    @media (min-width: 992px) {
+      .nav-label {
+        display: inline-block;
+      }
+    }
+
+    /* Layout: assignment + input */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.45fr);
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Sections / cards */
+    .section-card {
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.12), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(244, 63, 94, 0.18), transparent 55%),
+        linear-gradient(145deg, #020617, #020617 20%, #020617 100%);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 16px 15px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 18px 55px rgba(15, 23, 42, 0.95);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-index {
+      display: inline-flex;
+      width: 24px;
+      height: 24px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 10%, #f9fafb, #4ade80);
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 0.8rem;
+      box-shadow:
+        0 0 16px rgba(74, 222, 128, 0.7),
+        0 10px 20px rgba(15, 23, 42, 0.95);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-weight: 650;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .prompts {
+      font-size: 0.86rem;
+      color: #cbd5f5;
+      margin-bottom: 8px;
+      line-height: 1.5;
+      border-radius: 12px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.96)
+      );
+      padding: 8px 9px 7px;
+    }
+
+    .prompts strong {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    .highlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .dot-accent {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f97316, #22c55e);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.85);
+    }
+
+    .response {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .response label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 8px 9px;
+      border-radius: 12px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      font-size: 0.86rem;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease,
+        background 0.12s ease;
+    }
+
+    textarea:focus {
+      border-color: rgba(250, 204, 21, 0.8);
+      box-shadow:
+        0 0 0 1px rgba(234, 179, 8, 0.5),
+        0 18px 50px rgba(15, 23, 42, 1);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    textarea::placeholder {
+      color: rgba(148, 163, 184, 0.85);
+    }
+
+    .two-col-textareas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .small-input {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: rgba(15, 23, 42, 0.97);
+      color: var(--text-main);
+      font-size: 0.82rem;
+      outline: none;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .small-input:focus {
+      border-color: rgba(59, 130, 246, 0.8);
+      box-shadow:
+        0 0 0 1px rgba(59, 130, 246, 0.6),
+        0 12px 35px rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    /* Right column: assignment details */
+    .sidebar {
+      position: sticky;
+      top: 68px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sidebar-card {
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.18), transparent 55%),
+        linear-gradient(145deg, #020617, #020617 20%, #020617 100%);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 14px 13px 12px;
+      box-shadow: var(--shadow-strong);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .sidebar-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.86rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .sidebar-title span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #a855f7);
+      box-shadow: 0 0 14px rgba(129, 140, 248, 0.9);
+    }
+
+    .sidebar strong {
+      color: #e5e7eb;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 4px 0 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .footer-note {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    .footer-note strong {
+      color: #fbbf24;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- Top banner -->
+    <div class="banner">
+      <div class="badge">
+        <div class="badge-pill">
+          <div class="badge-pill-inner">BL</div>
+        </div>
+        <div class="badge-text">
+          <span>British Literature 2323 • Module 2</span>
+          <span>Empire &amp; National Identity – Group Studio</span>
+        </div>
+      </div>
+      <div class="course-meta">
+        <span class="meta-pill">Norton Anthology • Volume E</span>
+        <span class="meta-pill">“Empire and National Identity” • pp. 682–713</span>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="eyebrow">Focused on one cluster</div>
+        <div class="title-row">
+          <h1 class="hero-title">Empire &amp; National Identity.</h1>
+          <span class="hero-tag">Your Module #2 Focus</span>
+        </div>
+        <p class="hero-subtitle">
+          Use this page to craft a <strong>thorough, specific, and polished</strong> response
+          to every part of the Module #2 assignment, working only with the
+          <strong>“Empire and National Identity”</strong> readings in the Norton Anthology.
+        </p>
+        <p class="hero-note">
+          Draft your thinking here first—about imperial power, national myths, and colonial
+          voices—then move your best writing into a shared Word document with
+          <span>proper MLA formatting</span>.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" id="scrollToSections">
+            <span class="icon">✶</span>
+            <span>Start with Section I</span>
+          </button>
+          <div class="hero-meta">
+            <span>
+              <span class="hero-meta-dot"></span>
+              10 sections • I–X
+            </span>
+            <span>“Empire &amp; National Identity” only</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="orbital">
+          <div class="orbital-inner">
+            <div class="orbital-ring"></div>
+            <div class="orbital-ring"></div>
+            <div class="orbital-node"></div>
+            <div class="orbital-node"></div>
+            <div class="orbital-node"></div>
+            <div class="orbital-center">
+              <div class="orbital-center-inner">
+                <div class="orbital-title">Your Cluster</div>
+                <div class="orbital-main">
+                  Empire <span>&amp;</span><br />
+                  National Identity
+                </div>
+              </div>
+            </div>
+            <div class="orbital-footer">
+              <span class="orbital-label-pill">Imperial power &amp; belonging</span>
+              <span>Voices from Volume E</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky nav -->
+    <nav class="section-nav">
+      <div class="section-nav-inner">
+        <div>
+          <span class="nav-label">Jump to:</span>
+          <div class="scroll-nav" id="scrollNav">
+            <button data-target="section-I" class="active">I. Title &amp; Intro</button>
+            <button data-target="section-II">II. Whom Did You Read?</button>
+            <button data-target="section-III">III. Gut Reactions</button>
+            <button data-target="section-IV">IV. Formal Aspects</button>
+            <button data-target="section-V">V. Scope &amp; Content</button>
+            <button data-target="section-VI">VI. Style</button>
+            <button data-target="section-VII">VII. Audience</button>
+            <button data-target="section-VIII">VIII. Most Notable</button>
+            <button data-target="section-IX">IX. Vocabulary</button>
+            <button data-target="section-X">X. Associations</button>
+          </div>
+        </div>
+        <div class="course-meta" style="gap:6px;">
+          <span class="meta-pill">Empire &amp; National Identity • Group C</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Layout -->
+    <div class="layout">
+      <!-- LEFT: Response builder -->
+      <div>
+        <!-- I. Title & Introduction -->
+        <section class="section-card" id="section-I">
+          <div class="section-header">
+            <div class="section-index">I</div>
+            <h2 class="section-title">Title &amp; Introduction</h2>
+          </div>
+          <p class="section-tagline">
+            Give the “Empire and National Identity” readings a unifying title and explain their shared importance.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Invent a single, creative title that could sit on the front
+            of your MLA document or slides. In 1–2 focused paragraphs, explain how these texts
+            together explore <em>empire</em>, <em>nationhood</em>, and <em>identity</em>—for both
+            colonizers and colonized.
+          </div>
+          <div class="response">
+            <label for="groupTitle">Group’s unifying title</label>
+            <input
+              id="groupTitle"
+              class="small-input"
+              type="text"
+              placeholder="e.g., Mapping Empire: Voices of Nation and Resistance"
+            />
+          </div>
+          <div class="response">
+            <label for="introText">Introductory paragraph(s)</label>
+            <textarea
+              id="introText"
+              placeholder="Briefly introduce the 'Empire and National Identity' cluster, naming the main questions about imperial power, belonging, and nationhood that your group will help the class explore."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- II. Whom Did You Read? -->
+        <section class="section-card" id="section-II">
+          <div class="section-header">
+            <div class="section-index">II</div>
+            <h2 class="section-title">Whom Did You Read?</h2>
+          </div>
+          <p class="section-tagline">
+            Identify the authors and works in the “Empire and National Identity” cluster.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> For each assigned piece in this cluster, list:
+            author, full title, the author’s dates and location (as available), the original
+            publication context (journal, book, year), and a 2–3 sentence summary focused on
+            empire and national identity.
+          </div>
+          <div class="response">
+            <label for="whomText">
+              Authors &amp; readings from “Empire and National Identity”
+            </label>
+            <textarea
+              id="whomText"
+              placeholder="Ex: [Author] ([dates]), '[Title]' (year), originally published in [context]. The piece responds to British imperial expansion by...&#10;&#10;[Continue for each assigned text in the cluster.]"
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- III. Gut Reactions -->
+        <section class="section-card" id="section-III">
+          <div class="section-header">
+            <div class="section-index">III</div>
+            <h2 class="section-title">First / “Gut” Reactions</h2>
+          </div>
+          <p class="section-tagline">
+            Capture each group member’s first impressions of the empire/nation themes.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Do not analyze here—record feelings and first responses.
+            Name each group member and briefly describe their initial reaction to the “Empire
+            and National Identity” readings: anger at injustice, admiration for resistance,
+            discomfort with imperial attitudes, confusion, surprise, etc. Then note whether
+            those reactions changed after discussion.
+          </div>
+          <div class="highlight-badge">
+            <span class="dot-accent"></span>
+            All group members must appear here.
+          </div>
+          <div class="response">
+            <label for="gutText">
+              Member-by-member gut reactions to the empire cluster
+            </label>
+            <textarea
+              id="gutText"
+              placeholder="Ex: Jordan felt unsettled by how casually the text celebrates imperial power...&#10;Avery immediately connected with the resistance voice in [Text] and felt energized by its critique of empire...&#10;[Continue with each member and describe whether their reactions shifted after discussion.]"
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- IV. Formal Aspects -->
+        <section class="section-card" id="section-IV">
+          <div class="section-header">
+            <div class="section-index">IV</div>
+            <h2 class="section-title">Formal Aspects of the Texts</h2>
+          </div>
+          <p class="section-tagline">
+            Identify genres, rhetorical modes, and key literary techniques used to represent empire and nationhood.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> For each work in this cluster, name the genre
+            (poetry, prose, speech, essay, etc.) and the dominant rhetorical mode
+            (narration, description, compare/contrast, argument, etc.). Use
+            <em>specific quotations or details</em> to show how figurative language,
+            imagery, symbolism, or irony shape our understanding of empire and national identity.
+          </div>
+          <div class="response">
+            <label for="formalText">
+              Genre, rhetorical modes, and literary techniques (with examples)
+            </label>
+            <textarea
+              id="formalText"
+              placeholder="Ex: In [Title], a first-person narrator describes the colonized landscape with lush imagery, but the metaphors also erase local voices...&#10;A poem might use an irregular rhythm or broken syntax to mirror the fracture of national identity under empire...&#10;[Cite short phrases or lines as evidence.]"
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- V. Scope / Content -->
+        <section class="section-card" id="section-V">
+          <div class="section-header">
+            <div class="section-index">V</div>
+            <h2 class="section-title">Scope &amp; Content</h2>
+          </div>
+          <p class="section-tagline">
+            Clarify the historical context and main ideas about empire and identity.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Explain the historical and cultural background of British
+            imperial expansion and debates over national identity in the period your texts
+            come from. Then answer: What specifically are these texts about? How do they
+            present empire—as civilizing, destructive, inevitable, resistible? What versions
+            of “nation” or “home” do they imagine?
+          </div>
+          <div class="response">
+            <label for="scopeText">
+              Context, content, and importance for “Empire and National Identity”
+            </label>
+            <textarea
+              id="scopeText"
+              placeholder="Ex: Written during the height of British imperial power, these texts ask who gets to belong to the 'nation' and whose stories are silenced...&#10;Together, they show how empire shapes identity, citizenship, and ideas of 'civilization'—questions that still matter in today’s global politics..."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- VI. Style -->
+        <section class="section-card" id="section-VI">
+          <div class="section-header">
+            <div class="section-index">VI</div>
+            <h2 class="section-title">Style &amp; Voice</h2>
+          </div>
+          <p class="section-tagline">
+            Compare how different authors speak about empire and national identity.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Who is speaking in each text—a colonizer, a colonial subject,
+            a narrator looking back? What point of view do they use? Are the sentences formal,
+            official, and confident, or broken, ironic, and questioning? Compare voices that
+            defend empire with those that resist it, using short examples to show tone.
+          </div>
+          <div class="two-col-textareas">
+            <div>
+              <label for="styleCompare">
+                Overall comparison of styles in the cluster
+              </label>
+              <textarea
+                id="styleCompare"
+                placeholder="Compare how at least two authors sound when they write about empire and the nation. Who sounds authoritative or official? Who sounds marginalized, angry, or ironic?"
+              ></textarea>
+            </div>
+            <div>
+              <label for="styleExamples">
+                Key style examples (quoted phrases)
+              </label>
+              <textarea
+                id="styleExamples"
+                placeholder="Collect a few short quotations that really capture each author's tone toward empire and national identity."
+              ></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- VII. Audience -->
+        <section class="section-card" id="section-VII">
+          <div class="section-header">
+            <div class="section-index">VII</div>
+            <h2 class="section-title">Audience</h2>
+          </div>
+          <p class="section-tagline">
+            Think about who each empire-related text is written for.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Based on style, vocabulary, and original publication
+            context, who seems to be the intended audience? British politicians, educated
+            middle-class readers, colonial administrators, colonized subjects, fellow activists?
+            Was each piece widely read in its own time, or did it become important later? How
+            does the intended audience shape how empire and national identity are described?
+          </div>
+          <div class="response">
+            <label for="audienceText">
+              Intended audience &amp; publishing context for each text
+            </label>
+            <textarea
+              id="audienceText"
+              placeholder="Ex: Because [Text] first appeared in a London periodical read by the educated elite, it frames empire as a national duty...&#10;By contrast, [Other Text], circulated in a colonial context, speaks directly to subjects who feel excluded from the British 'nation'..."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- VIII. Most Notable -->
+        <section class="section-card" id="section-VIII">
+          <div class="section-header">
+            <div class="section-index">VIII</div>
+            <h2 class="section-title">Most Notable Aspects</h2>
+          </div>
+          <p class="section-tagline">
+            Name what most surprised or disturbed you about representations of empire and identity.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Identify anything shocking, ironic, or powerful in the way
+            these texts talk about empire, race, nationhood, or “civilization.” Are there images,
+            metaphors, or claims you found difficult to accept? If nothing felt controversial,
+            explain why the works seemed straightforward or reassuring in their picture of empire.
+          </div>
+          <div class="response">
+            <label for="notableText">
+              What stood out most to your group about empire and national identity?
+            </label>
+            <textarea
+              id="notableText"
+              placeholder="Ex: Our group was most struck by how casually one text assumes British rule is 'natural,' while another text quietly undermines that idea by showing the emotional cost of conquest..."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- IX. Vocabulary -->
+        <section class="section-card" id="section-IX">
+          <div class="section-header">
+            <div class="section-index">IX</div>
+            <h2 class="section-title">Best Vocabulary</h2>
+          </div>
+          <p class="section-tagline">
+            Collect powerful or revealing words about empire, race, and nationhood.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> After highlighting in your anthology, choose especially
+            “great” words that help build ideas about empire and national identity. These might
+            be technical terms, political slogans, or loaded adjectives. For each term, give the
+            word, a brief definition in your own words, and why it matters in this context.
+          </div>
+          <div class="response">
+            <label for="vocabText">
+              Vocabulary list with explanations (empire &amp; national identity)
+            </label>
+            <textarea
+              id="vocabText"
+              placeholder="Ex: 'Civilizing mission' – a phrase used to justify empire by claiming it improves colonized peoples; important because it hides violence behind moral language...&#10;'Homeland' – suggests emotional belonging, but the readings show how empire complicates whose homeland counts..."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- X. Associations -->
+        <section class="section-card" id="section-X">
+          <div class="section-header">
+            <div class="section-index">X</div>
+            <h2 class="section-title">Connections &amp; Associations</h2>
+          </div>
+          <p class="section-tagline">
+            Connect the “Empire and National Identity” readings to films, art, music, and other literature.
+          </p>
+          <div class="prompts">
+            <strong>Guidance:</strong> Brainstorm as a group. Which movies, songs, paintings,
+            TV shows, novels, plays, or poems feel connected to the way these texts present
+            empire and national identity? Be selective and explain the link: similar portrayals
+            of colonial subjects, parallel struggles over belonging, or contrasting views of
+            national pride and shame.
+          </div>
+          <div class="two-col-textareas">
+            <div>
+              <label for="mediaAssoc">
+                Motion pictures, visual art, &amp; music
+              </label>
+              <textarea
+                id="mediaAssoc"
+                placeholder="Ex: We connected [Film] to this cluster because both show the tension between loyalty to the empire and loyalty to local communities..."
+              ></textarea>
+            </div>
+            <div>
+              <label for="litAssoc">
+                Other literary works (novels, poems, plays)
+              </label>
+              <textarea
+                id="litAssoc"
+                placeholder="Ex: [Novel/Poem] echoes our readings in the way it questions who gets to be part of the 'nation' and who is left outside its borders..."
+              ></textarea>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT: Assignment & topic -->
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-title">
+            <span class="dot"></span>
+            <span>Assignment Snapshot</span>
+          </div>
+          <p>
+            This page mirrors your <strong>British Literature 2323, Module #2</strong> group
+            assignment, but it is focused only on the Norton Anthology cluster
+            <strong>“Empire and National Identity” (Volume E, pp. 682–713)</strong>.
+          </p>
+          <ul>
+            <li>✔ Every group member contributes to the written report.</li>
+            <li>✔ Final document must follow <strong>MLA format</strong> in Word.</li>
+            <li>✔ Responses should be detailed and specific, not vague or minimal.</li>
+          </ul>
+          <p class="footer-note">
+            Use this space to <strong>draft and refine</strong> your thinking about
+            empire, nationhood, and identity before polishing it for your MLA document.
+          </p>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title">
+            <span class="dot"></span>
+            <span>Empire &amp; National Identity • Volume E</span>
+          </div>
+          <p>
+            Your readings explore how British imperial expansion reshaped what it meant to be
+            a “nation” and who counted as part of it. As you work:
+          </p>
+          <ul>
+            <li>• Track how <strong>British identity</strong> is defined or challenged.</li>
+            <li>• Notice how <strong>colonial voices</strong> speak back to empire.</li>
+            <li>• Pay attention to <strong>images of land, home, and borders</strong>.</li>
+            <li>• Ask who is <strong>included</strong> or <strong>excluded</strong> from the nation.</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-title">
+            <span class="dot"></span>
+            <span>Tips for a Strong MLA Report</span>
+          </div>
+          <ul>
+            <li>• Use <strong>clear topic sentences</strong> for each paragraph.</li>
+            <li>• Blend <strong>quotation and analysis</strong>—never leave quotes unexplained.</li>
+            <li>• Name authors and texts precisely and consistently.</li>
+            <li>• Make sure the final document is <strong>carefully proofread</strong> and unified in voice.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    // Smooth scrolling for section nav
+    const scrollButtons = document.querySelectorAll("#scrollNav button");
+    const sections = {};
+    scrollButtons.forEach((btn) => {
+      const id = btn.getAttribute("data-target");
+      const el = document.getElementById(id);
+      if (el) sections[id] = el;
+      btn.addEventListener("click", () => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // Highlight active nav button while scrolling
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            scrollButtons.forEach((btn) => {
+              btn.classList.toggle(
+                "active",
+                btn.getAttribute("data-target") === id
+              );
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    Object.values(sections).forEach((sec) => observer.observe(sec));
+
+    // Scroll-to-section-I button
+    const scrollToSections = document.getElementById("scrollToSections");
+    const firstSection = document.getElementById("section-I");
+    if (scrollToSections && firstSection) {
+      scrollToSections.addEventListener("click", () => {
+        firstSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  </script>
+</body>
+</html>
